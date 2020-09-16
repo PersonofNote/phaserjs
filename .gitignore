@@ -14,5 +14,4 @@ package-lock.json
 node_modules/
 
 # Build
-dist/
 /npm-debug.log
