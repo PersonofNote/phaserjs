@@ -5,33 +5,30 @@ export default class Plant extends Phaser.GameObjects.Sprite{
         super(scene, x, y, texture, frame, health, inventory);
         this.health = health;
         this.inventory = inventory;
-        console.log(this.health);
         scene.add.existing(this);
         this.setInteractive();
         this.on('pointerdown', this.onClicked.bind(this), scene);
-        console.log(scene);
         this.scene = scene;
-
-        tween = this.tweens.add({
-            targets: this.texture,
-            x: 400,
-            y: 300,
-            ease: 'Sine.easeIn',
-            duration: 5000,
-            paused: true
+        this.tween = this.scene.tweens.add({
+            targets: this,
+            scaleX: { from: 1, to: 1.01 },
+            scaleY: {from: 1, to: 1.05},
+            ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 3,
+            repeat: 0,            // -1: infinity
+            yoyo: true
         });
+
     }
     
     onClicked() { 
-        tween.play();
-        console.log(this.health);
+        this.tween.play();
         this.health--;
         //this.scene.add.tween(this).to( { alpha: 0 }, 2000, "Linear", true);
         if (this.health <= 0) {
             for (let i = 0; i < this.inventory.length; i++) {
-                //this.scene.add.text((this.x + Math.random()* 100), ( this.y + Math.random() * 100), this.inventory[i]);
-                //var drop = new Craftable(this.scene, (this.x + Math.random()*50), (this.y + Math.random() * 50), this.inventory[i], 0, "Fiber", "From a plant");
-              
+                this.scene.add.text((this.x + Math.random()* 100), ( this.y + Math.random() * 100), this.inventory[i]);
+                var drop = new Craftable(this.scene, (this.x + Math.random()*50), (this.y + Math.random() * 50), this.inventory[i], 0, "Fiber", "From a plant");  
             }
             this.destroy();
         }
