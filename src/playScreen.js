@@ -14,6 +14,7 @@ export default class playScreen extends Phaser.Scene {
         this.cameras.main.setZoom(1);
         this.cameras.main.centerOn(0, 0);
 
+        /*
         this.input.on('pointerdown', function () {
             // Update to zoom in on button press to the mouse positions
             var cam = this.cameras.main;
@@ -22,6 +23,7 @@ export default class playScreen extends Phaser.Scene {
                 cam.zoomTo(4, 3000);
     
         }, this);
+        */
 
         // WORLD
         this.add.image(400, 400, "bg_sky").setDisplaySize(800, 800);
